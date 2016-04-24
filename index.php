@@ -76,6 +76,7 @@ class Brasa_Update_Deploy_File {
 	 */
 	private function validate_secret() {
 		list ( $algo, $signature ) = explode( '=', $_SERVER['HTTP_X_HUB_SIGNATURE'] );
+		//var_dump( explode( '=', $_SERVER['HTTP_X_HUB_SIGNATURE'] ) );
         if ( $algo !== 'sha1' ) {
             // see https://developer.github.com/webhooks/securing/
             return false;
@@ -83,9 +84,12 @@ class Brasa_Update_Deploy_File {
         if ( ! isset( $this->options[ 'brasa_deploy_secret' ] ) ) {
         	return false;
         }
-        var_dump( $this->options[ 'brasa_deploy_secret' ] );
+        //var_dump( $HTTP_RAW_POST_DATA );
         $payloadhash = hash_hmac( $algo, file_get_contents('php://input'), $this->options[ 'brasa_deploy_secret' ] );
-        return ($payloadhash === $signature);
+        if ( $payloadhash == $signature ) {
+        	return true;
+        }
+        return false;
 	}
 	/**
 	 * Deploy last commit from GitHub repo
@@ -97,6 +101,9 @@ class Brasa_Update_Deploy_File {
 			wp_die( 'false 0' );
 		}
 		$this->data = json_decode( file_get_contents( 'php://input' ), true );
+		if ( $this->validate_secret() === false ) {
+			return false;
+		}
 		$branch = $this->options[ 'brasa_deploy_branch' ];
 		$branch_pos = strpos( $this->data[ 'ref' ], $branch );
         if ( ! $branch || $branch_pos === false ) {
