@@ -64,7 +64,7 @@ Mark webhook to Active and save. Now we can return to the WordPress dashboard.
 
 In the WordPress dashboard, go to the Tools menu -> Brasa Theme Deploy.
 
-On this page, fill Secret with the password you used earlier and also the branch you want to synchronize.
+On this page, fill Secret with the password you used earlier and also the branch slug you want to synchronize.
 
 Save and the next time you give a push to that branch, your site will be updated automatically.
 
