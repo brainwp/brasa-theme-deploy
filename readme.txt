@@ -1,56 +1,80 @@
-=== Your Plugin Name ===
-Contributors: your_wp_user_name
-Donate link: http://your-donation-link.com/
-Tags: your_tags
-Requires at least: 3.0
-Tested up to: 3.8
-Stable tag: 1.0.0
+=== Plugin Name ===
+Contributors: brasadesign, matheusgimenez
+Donate link: http://brasa.art.br
+Tags: git, github, theme sync, github deploy, deploy, deploy github
+Requires at least: 4.5
+Tested up to: 4.6
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Short description
+Deploy our theme hosted on GitHub automatically whenever you have a commit.
 
 == Description ==
 
-Long description
+Deploy our theme hosted on GitHub automatically whenever you have a commit on a specific branch. Simple, easy, free.
+
+How to use:
+
+To use the plugin download it by the WordPress panel or upload via FTP in the wp-content folder /plugins . Then activate it.
+
+When the plugin is enabled check make sure that the theme is ready in the wp-content folder /themes . The name of the theme folder must match the address on GitHub. Example:
+
+Link GitHub: http://github.com/wpbrasil/odin/ in this case, the folder name would be /odin.
+
+Once verified these steps, go to your repository on GitHub, then enter the Settings page of the repository within that page, click the link Webhooks & services.
+
+Within this page, click Add webhook. A password confirmation box will open, confirm and a form will appear:
+
+In Payload URL complete with:
+http://SITE_ADDRESS/wp-admin/admin-ajax.php?action=brasa_deploy
+
+In Content-type, leave the default selection (application/json).
+
+In the field Secret, use a strong password, consider using a password generator.
+
+Mark webhook to Active and save. Now we can return to the WordPress dashboard.
+
+In the WordPress dashboard, go to the Tools menu -> Brasa Theme Deploy.
+
+On this page, fill Secret with the password you used earlier and also the branch you want to synchronize.
+
+Save and the next time you give a push to that branch, your site will be updated automatically.
 
 == Installation ==
 
-* Upload plugin files to your plugins folder, or install using WordPress built-in Add New Plugin installer;
-* Activate the plugin;
-* Navigate to Plugin Settings and fill settings.
+To use the plugin download it by the WordPress panel or upload via FTP in the wp-content folder /plugins . Then activate it.
+
+When the plugin is enabled check make sure that the theme is ready in the wp-content folder /themes . The name of the theme folder must match the address on GitHub. Example:
+
+Link GitHub: http://github.com/wpbrasil/odin/ in this case, the folder name would be /odin.
+
+Once verified these steps, go to your repository on GitHub, then enter the Settings page of the repository within that page, click the link Webhooks & services.
+
+Within this page, click Add webhook. A password confirmation box will open, confirm and a form will appear:
+
+In Payload URL complete with:
+http://SITE_ADDRESS/wp-admin/admin-ajax.php?action=brasa_deploy
+
+In Content-type, leave the default selection (application/json).
+
+In the field Secret, use a strong password, consider using a password generator.
+
+Mark webhook to Active and save. Now we can return to the WordPress dashboard.
+
+In the WordPress dashboard, go to the Tools menu -> Brasa Theme Deploy.
+
+On this page, fill Secret with the password you used earlier and also the branch you want to synchronize.
+
+Save and the next time you give a push to that branch, your site will be updated automatically.
 
 == Frequently Asked Questions ==
 
-= What is the plugin license? =
+= Works with GitLab or another Git repository? =
 
-* This plugin is released under a GPL license.
-
-== Screenshots ==
-
-1. Image 01.
-2. Image 02.
+No. Only on GitHub
 
 == Changelog ==
 
-= 1.0 =
-
-* Notes of the version.
-
-== Upgrade Notice ==
-
-= 1.0 =
-
-* Initial Version.
-
-== License ==
-
-This file is part of Your Plugin Name.
-
-Your Plugin Name is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published
-by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
-
-Your Plugin Name is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-Get a copy of the GNU General Public License in <http://www.gnu.org/licenses/>.
+= 0.1 =
+First version
