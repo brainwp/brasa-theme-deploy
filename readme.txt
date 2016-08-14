@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Brasa Git Theme Deploy ===
 Contributors: brasadesign, matheusgimenez
 Donate link: http://brasa.art.br
 Tags: git, github, theme sync, github deploy, deploy, deploy github
