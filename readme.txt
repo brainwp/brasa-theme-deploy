@@ -3,7 +3,7 @@ Contributors: brasadesign, matheusgimenez
 Donate link: http://brasa.art.br
 Tags: git, github, theme sync, github deploy, deploy, deploy github
 Requires at least: 4.5
-Tested up to: 4.6
+Tested up to: 4.8
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -76,5 +76,8 @@ No. Only on GitHub
 
 == Changelog ==
 
-= 0.1 =
+= 1.0 =
 First version
+
+= 1.1 =
+Added deploy by commit hash feature on wp dashboard

@@ -12,7 +12,7 @@
  * Plugin Name:       Brasa GitHub Theme Deploy
  * Plugin URI:        @TODO
  * Description:       @TODO
- * Version:           1.0.0
+ * Version:           1.1
  * Author:            @TODO
  * Author URI:        @TODO
  * Text Domain:       plugin-name-locale
