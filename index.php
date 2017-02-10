@@ -23,6 +23,9 @@
  */
 // Include plugin options
 require 'inc/options.php';
+// Include deploy by commit hash class
+require 'inc/class-deploy-by-commit.php';
+
 class Brasa_Update_Deploy_File {
 	/**
 	* Instance of this class.
@@ -42,7 +45,7 @@ class Brasa_Update_Deploy_File {
 	 * Download & extract theme tar.gz file from GitHub
 	 * @return type
 	 */
-    private function extract_file() {
+    protected function extract_file() {
 		$folder = get_template_directory();
 		$folder = explode( '/', $folder );
 		unset( $folder[ count( $folder ) - 1 ] );
@@ -62,6 +65,26 @@ class Brasa_Update_Deploy_File {
 		rename( $folder . '/' . $folder_format, $template_folder );
 		unlink( $folder . '/' . $file_format );
 		return true;
+	}
+	/**
+	 * Check if a commit exist by hash
+	 * @param string $hash
+	 * @return boolean
+	 */
+	public function commit_exists( $hash ) {
+    	if ( ! isset( $this->options[ 'brasa_deploy_repository' ] ) ) {
+    		return false;
+    	}
+		$response = wp_remote_get( sprintf( 'https://api.github.com/repos/%s/git/commits/%s', $this->options[ 'brasa_deploy_repository' ], $hash ) );
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( 200 === intval( $response_code ) ) {
+			return true;
+		} elseif ( 403 == intval( $response_code ) ) {
+			$this->options[ 'error' ] = __( 'Error: API rate limit exceeded for your server IP', 'odin' );
+		} else {
+			$this->options[ 'error' ] = __( 'Error: This commit does not exist', 'odin' );
+			return false;
+		}
 	}
 	/**
 	 * Construct class
@@ -127,4 +150,11 @@ class Brasa_Update_Deploy_File {
 		return self::$instance;
 	}
 }
-add_action( 'plugins_loaded', array( 'Brasa_Update_Deploy_File', 'get_instance' ), 0 );
+/**
+ * Instance plugin classes
+ */
+function brasa_theme_deploy_load_classes() {
+	new Brasa_Update_Deploy_File();
+	new Brasa_Force_Deploy_By_Commit();
+}
+add_action( 'plugins_loaded', 'brasa_theme_deploy_load_classes' );
